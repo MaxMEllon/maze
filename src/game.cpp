@@ -17,7 +17,8 @@ void Game::exec()
 
 bool Game::judgeEnd()
 {
-  int const **mp = this->map->maze();
-  return mp[map->height()-2][map->width()-2] == CHARACTER;
+  // TODO:
+  // return mp[map->height()-2][map->width()-2] == CHARACTER;
+  return 0;
 }
 

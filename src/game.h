@@ -9,9 +9,9 @@ class Game
   public:
     Game();
     void exec();
+    Map *map;
   private:
     bool judgeEnd();
-    Map *map;
 };
 
 #endif
