@@ -19,8 +19,9 @@ map.o: src/map.cpp
 
 .PHONY: test
 test: $(OBJS)
+	$(CXX) -D"TEST" -c src/window.cpp $(OPT)
 	$(CXX) -Wall -Wextra -pedantic -o test.out $(OBJS) test/test.cpp $(OPT)
-	-./test.out
+	-rm *.o
 
 .PHONY: clean
 clean:

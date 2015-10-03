@@ -5,6 +5,7 @@ sudo:
     - required
 script:
     - make test
+    - ./test.out
 install:
     - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
     - sudo apt-get -qq update
