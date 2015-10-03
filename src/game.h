@@ -8,6 +8,7 @@ class Game
 {
   public:
     Game();
+    ~Game();
     void exec();
     Map *map;
   private:

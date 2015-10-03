@@ -8,6 +8,11 @@ Game::Game()
   this->map = new Map();
 }
 
+Game::~Game()
+{
+  delete this->map;
+}
+
 void Game::exec()
 {
   while ( ! this->judgeEnd() ) {

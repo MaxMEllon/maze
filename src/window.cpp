@@ -34,3 +34,8 @@ int Window::getKeyStroke()
 {
   return getch();
 }
+
+void Window::free()
+{
+  endwin();
+}

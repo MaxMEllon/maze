@@ -12,6 +12,7 @@ class Window
     static void moveCursol(int x, int y);
     static void refreshWindow();
     static void initalize();
+    static void free();
 };
 
 #endif

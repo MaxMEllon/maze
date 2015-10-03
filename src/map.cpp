@@ -1,8 +1,3 @@
-#include <iostream>
-#include <time.h>
-#include <stdlib.h>
-#include <ncurses.h>
-
 #include "map.h"
 
 #define WIDTH  19
@@ -16,6 +11,14 @@ Map::Map()
 Map::Map(int _width, int _height)
 {
   this->__construct(_width, _height);
+}
+
+Map::~Map()
+{
+  Window::free();
+  for ( int _i; _i < _height; _i++ ) { delete[] _maze[_i]; }
+  delete _maze;
+  _maze = 0;
 }
 
 int const ** Map::maze()
@@ -35,9 +38,8 @@ int Map::height()
 
 void Map::__construct(int _width, int _height)
 {
-  int _i;
   this->_maze = new int*[_height];
-  for ( _i = 0; _i < _height; _i++ ) { this->_maze[_i] = new int[_width]; }
+  for ( int _i = 0; _i < _height; _i++ ) { this->_maze[_i] = new int[_width]; }
   this->_width  = _width;
   this->_height = _height;
   this->initMaze();

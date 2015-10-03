@@ -10,6 +10,7 @@ class Map
   public:
     Map();
     Map(int _width, int _height);
+    ~Map();
     int const **maze();
     int height();
     int width();
@@ -19,7 +20,7 @@ class Map
   private:
     Character *character;
     Window *window;
-    int** _maze;
+    int **_maze;
     int _height;
     int _width;
     void __construct(int _width, int _height);
