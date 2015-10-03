@@ -21,10 +21,3 @@ bool Game::judgeEnd()
   return mp[map->height()-2][map->width()-2] == CHARACTER;
 }
 
-int main(int argc, char const* argv[])
-{
-  Game *game = new Game();
-  game->exec();
-  return 0;
-}
-

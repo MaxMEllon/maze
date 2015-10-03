@@ -2,8 +2,8 @@ OBJS = map.o game.o character.o window.o
 CXX = g++
 OPT = -lncurses
 
-game.out: $(OBJS)
-	$(CXX) $(OPT) -Wall -O2 -o $@ $(OBJS)
+main.out: $(OBJS)
+	$(CXX) $(OPT) -Wall -O2 -o $@ $(OBJS) src/main.cpp
 
 window.o: src/window.cpp
 	$(CXX) $(OPT) -c $<
@@ -17,7 +17,13 @@ game.o: src/game.cpp
 map.o: src/map.cpp
 	$(CXX) $(OPT) -c $<
 
+.PHONY: test
+test: $(OBJS)
+	$(CXX) $(OPT) -Wall -Wextra -pedantic -o test.out $(OBJS) test/test.cpp
+	-./test.out
+
 .PHONY: clean
+
 clean:
 	-rm *.o *.out
 
