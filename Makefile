@@ -22,6 +22,6 @@ clean:
 	-rm *.o *.out
 
 exec: game.out
-	./$<
+	-./$<
 	-rm *.o *.out
 

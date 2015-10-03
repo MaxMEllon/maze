@@ -81,9 +81,9 @@ void Map::print()
   character->move(key, maze(), width(), height());
 }
 
-void Map::printChar(int _prace)
+void Map::printChar(int _place)
 {
-  switch ( _prace ) {
+  switch ( _place ) {
     case WALL:
       Window::addString("@@@");
       break;

@@ -25,7 +25,7 @@ class Map
     void __construct(int _width, int _height);
     void createRoadOfMaze();
     void initMaze();
-    void printChar(int _prace);
+    void printChar(int _place);
 };
 
 #endif
