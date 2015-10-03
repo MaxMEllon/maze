@@ -3,7 +3,7 @@ CXX = g++
 OPT = -lncurses
 
 main.out: $(OBJS)
-	$(CXX) $(OPT) -Wall -O2 -o $@ $(OBJS) src/main.cpp
+	$(CXX) -Wall -O2 -o $@ $(OBJS) src/main.cpp $(OPT)
 
 window.o: src/window.cpp
 	$(CXX) $(OPT) -c $<
@@ -19,15 +19,14 @@ map.o: src/map.cpp
 
 .PHONY: test
 test: $(OBJS)
-	$(CXX) $(OPT) -Wall -Wextra -pedantic -o test.out $(OBJS) test/test.cpp
+	$(CXX) -Wall -Wextra -pedantic -o test.out $(OBJS) test/test.cpp $(OPT)
 	-./test.out
 
 .PHONY: clean
-
 clean:
 	-rm *.o *.out
 
-exec: game.out
+exec: main.out
 	-./$<
 	-rm *.o *.out
 

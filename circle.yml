@@ -1,0 +1,9 @@
+dependencies:
+  pre:
+    - sudo apt-get update; sudo apt-get install
+    - sudo apt-get install libncurses-dev
+test:
+  override:
+    - make test
+machine:
+  timezone: Asia/Tokyo
