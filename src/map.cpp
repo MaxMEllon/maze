@@ -2,6 +2,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <ncurses.h>
+
 #include "map.h"
 
 #define WIDTH  19
@@ -17,9 +18,9 @@ Map::Map(int _width, int _height)
   this->__construct(_width, _height);
 }
 
-int** Map::maze()
+int const ** Map::maze()
 {
-  return this->_maze;
+  return (int const **)this->_maze;
 }
 
 int Map::width()
@@ -40,9 +41,9 @@ void Map::__construct(int _width, int _height)
   this->_width  = _width;
   this->_height = _height;
   this->initMaze();
-  this->initScreen();
   this->createRoadOfMaze();
   this->character = new Character();
+  Window::initalize();
 }
 
 void Map::initMaze()
@@ -59,24 +60,12 @@ void Map::initMaze()
   }
 }
 
-void Map::initScreen()
-{
-#ifndef WIN_OS
-  initscr();
-  noecho();
-  cbreak();
-  keypad(stdscr, TRUE);
-#endif
-}
-
 void Map::print()
 {
   int _i, _j;
   int key = -1;
-#ifndef WIN_OS
-  erase();
-  move(0, 0);
-#endif
+  Window::eraseBuff();
+  Window::moveCursol(0, 0);
   for ( _i = 0; _i < height(); _i++ ) {
     for ( _j = 0; _j < width(); _j++ ) {
       if ( character->x() == _i && character->y() == _j ) {
@@ -85,51 +74,45 @@ void Map::print()
       }
       this->printChar(this->_maze[_i][_j]);
     }
-#ifndef WIN_OS
-    addstr("\n");
-#endif
+    Window::addString("\n");
   }
-#ifndef WIN_OS
-  refresh();
-  key = getch();
-#endif
+  Window::refreshWindow();
+  key = Window::getKeyStroke();
   character->move(key, maze(), width(), height());
 }
 
 void Map::printChar(int _prace)
 {
-#ifndef WIN_OS
   switch ( _prace ) {
     case WALL:
-      addstr("@@@");
+      Window::addString("@@@");
       break;
     case ENPTY:
-      addstr("   ");
+      Window::addString("   ");
       break;
     case GALL:
-      addstr(" G ");
+      Window::addString(" G ");
       break;
     case CHARACTER:
-      addstr(" * ");
+      Window::addString(" * ");
       break;
   }
-#endif
 }
 
 void Map::createRoadOfMaze()
 {
   int _i, _j, dir;
-  int add[4][2] = {{0,  1}, {0,  -1}, {1, 0}, {-1, 0}};
+  int add[4][2] = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
   srand((unsigned)time(NULL));
   for ( _i = 2; _i < height()-2; _i += 2 ) {
     for ( _j = 2; _j < width()-2; _j += 2 ) {
       do {
         dir = rand() % 4;
-      } while ( this->_maze[_i + add[dir][0]][_j + add[dir][1]] == 1 );
-      this->_maze[_i + add[dir][0]][_j + add[dir][1]] = 1;
+      } while ( this->_maze[_i + add[dir][0]][_j + add[dir][1]] == WALL );
+      this->_maze[_i + add[dir][0]][_j + add[dir][1]] = WALL;
     }
   }
-  this->_maze[height()-2][width()-2] = 2;
+  this->_maze[height()-2][width()-2] = GALL;
 }
 
 void Map::__debug()

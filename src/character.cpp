@@ -1,7 +1,3 @@
-#include <iostream>
-#include <time.h>
-#include <stdlib.h>
-#include <ncurses.h>
 #include "character.h"
 
 Character::Character()
@@ -20,7 +16,7 @@ int Character::y()
   return this->_y;
 }
 
-void Character::move(int key, int **map, int width, int height)
+void Character::move(int key, const int **map, int width, int height)
 {
 #ifndef WIN_OS
   switch ( key ) {
