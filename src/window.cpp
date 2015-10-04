@@ -1,7 +1,5 @@
 #include "window.h"
 
-#include <ncurses.h>
-
 void Window::initalize()
 {
 #ifndef TEST

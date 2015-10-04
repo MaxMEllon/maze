@@ -18,7 +18,6 @@ int Character::y()
 
 void Character::move(int key, const int **map, int width, int height)
 {
-#ifndef WIN_OS
   switch ( key ) {
     case KEY_UP:
       if ( map[_x-1][_y] == WALL ) { return; }
@@ -37,5 +36,4 @@ void Character::move(int key, const int **map, int width, int height)
       if ( _y < width-1 ) { this->_y++; }
       break;
   }
-#endif
 }

@@ -1,9 +1,8 @@
-#include "character.h"
-#include "window.h"
-#include "env.h"
-
 #ifndef INCLUDED_MAP
 #define INCLUDED_MAP
+
+#include "character.h"
+#include "window.h"
 
 class Map
 {
@@ -19,7 +18,6 @@ class Map
 
   private:
     Character *character;
-    Window *window;
     int **_maze;
     int _height;
     int _width;

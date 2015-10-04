@@ -1,10 +1,11 @@
 #include "../src/game.h"
 
-#define OK "\x1b[1m\x1b[32m✔\x1b[49m\x1b[0m"
-#define NG "\x1b[1m\x1b[40m✘\x1b[49m\x1b[0m"
+#define OK_MARK "\x1b[1m\x1b[32m✔\x1b[49m\x1b[0m"
+#define NG_MARK "\x1b[1m\x1b[40m✘\x1b[49m\x1b[0m"
 
 void test1(void);
 void test2(void);
+void test3(void);
 void testing(bool ope);
 
 int flag = 0;
@@ -13,6 +14,7 @@ int main(void)
 {
   test1();
   test2();
+  // test3();
   return flag;
 }
 
@@ -28,16 +30,15 @@ void test1(void)
   try {
     testing(10 == n);
   } catch(bool e) {
-    std::cout << "test1 : " << NG << std::endl;
+    std::cout << "test1 : " << NG_MARK << std::endl;
     flag = 1;
     return;
   }
-  std::cout << "test1 : " << OK  << std::endl;
+  std::cout << "test1 : " << OK_MARK  << std::endl;
 }
 
 void test2(void)
 {
-  bool flag = true;
   Game *game = new Game();
   int const **mz = game->map->maze();
   int wid = game->map->width();
@@ -52,11 +53,34 @@ void test2(void)
       }
     }
   } catch(bool e) {
-    std::cout << "test2 : " << NG << std::endl;
+    std::cout << "test2 : " << NG_MARK << std::endl;
     delete game;
     flag = 1;
     return;
   }
   delete game;
-  std::cout << "test2 : " << OK  << std::endl;
+  std::cout << "test2 : " << OK_MARK << std::endl;
+}
+
+void test3(void)
+{
+  Game *game = new Game();
+  int const **mz = game->map->maze();
+  int wid = game->map->width();
+  int hei = game->map->height();
+  Character *character = new Character();
+  int x = character->x();
+  int y = character->y();
+  character->move(KEY_DOWN, mz, wid, hei);
+  character->move(KEY_RIGHT, mz, wid, hei);
+  try {
+    testing(x != character->x() || y != character->y());
+  } catch (bool e) {
+    std::cout << "test3 : " << NG_MARK << std::endl;
+    delete game;
+    flag = 1;
+    return;
+  }
+  delete game;
+  std::cout << "test3 : " << OK_MARK << std::endl;
 }
