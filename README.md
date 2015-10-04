@@ -17,7 +17,8 @@ $ make exec
 
 ## Requirement
 
-- g++
+- g++ >= 4.7
+- ncurses >= 5.7
 
 ## Author
 
