@@ -16,7 +16,7 @@ int main(void)
 {
   test1();
   test2();
-  // test3();
+  test3();
   return flag;
 }
 
@@ -79,5 +79,7 @@ void test3(void)
   character->move(KEY_DOWN,  map->maze(), map->width(), map->height());
   character->move(KEY_RIGHT, map->maze(), map->width(), map->height());
   expect(x != character->x() || y != character->y());
+  delete map;
+  delete character;
   cout << endl;
 }
