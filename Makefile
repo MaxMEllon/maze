@@ -1,6 +1,5 @@
 OBJS = map.o game.o character.o window.o
-CXX = g++ -std=c++11
-OPT = -ltinfo -lncurses
+OPT = -ltinfo -lncurses -std=c++11
 TEST = -D"TEST"
 
 main.out: $(OBJS)

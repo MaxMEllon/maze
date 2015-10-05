@@ -57,10 +57,10 @@ void test2(void)
   int const **mz = game->map->maze();
   int wid = game->map->width();
   int hei = game->map->height();
-  for ( int _i; _i < hei; _i++ ) {
+  for ( int _i = 0; _i < hei; _i++ ) {
     expect(mz[_i][0] == 1);
     expect(mz[_i][wid-1] == 1);
-    for ( int _j; _j < wid; _j++ ) {
+    for ( int _j = 0; _j < wid; _j++ ) {
       expect(mz[0][_j] == 1);
       expect(mz[hei-1][_j] == 1);
     }
