@@ -7,10 +7,11 @@ class Game
 {
   public:
     Game();
-    ~Game();
+    ~Game() = default;
     Game& operator=(Game const& game) = default;
     void exec();
     Map *map;
+
   private:
     bool judgeEnd();
 };
