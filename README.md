@@ -1,5 +1,7 @@
 # maze
 
+[![Build Status](https://travis-ci.org/MaxMEllon/maze.svg?branch=master)](https://travis-ci.org/MaxMEllon/maze)
+
 ## Description
 
 cppでオブジェクト指向の練習を兼ねてコンソール迷路
