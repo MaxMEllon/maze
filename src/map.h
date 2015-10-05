@@ -11,6 +11,7 @@ class Map
     Map(int _width, int _height);
     Map& operator=(Map const& map) = default;
     ~Map();
+    Character *character;
     int const **maze();
     int height();
     int width();
@@ -18,7 +19,6 @@ class Map
     void print();
 
   private:
-    Character *character;
     int **_maze;
     int _height;
     int _width;

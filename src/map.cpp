@@ -92,7 +92,7 @@ void Map::printChar(int _place)
     case ENPTY:
       Window::addString("   ");
       break;
-    case GALL:
+    case GOAL:
       Window::addString(" G ");
       break;
     case CHARACTER:
@@ -114,7 +114,7 @@ void Map::createRoadOfMaze()
       _maze[_i + add[dir][0]][_j + add[dir][1]] = WALL;
     }
   }
-  _maze[height()-2][width()-2] = GALL;
+  _maze[height()-2][width()-2] = GOAL;
 }
 
 void Map::__debug()

@@ -7,6 +7,7 @@ class Game
 {
   public:
     Game();
+    Game(int width, int height);
     ~Game() = default;
     Game& operator=(Game const& game) = default;
     void exec();

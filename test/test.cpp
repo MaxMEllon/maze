@@ -6,6 +6,7 @@
 void test1(void);
 void test2(void);
 void test3(void);
+void test4(void);
 
 void testing(bool ope);
 bool expect(bool ope);
@@ -17,6 +18,7 @@ int main(void)
   test1();
   test2();
   test3();
+  test4();
   return flag;
 }
 
@@ -53,16 +55,13 @@ void test1(void)
 void test2(void)
 {
   cout << "test2 : ";
-  Game *game = new Game();
+  Game *game = new Game(5, 5);
   int const **mz = game->map->maze();
   int wid = game->map->width();
   int hei = game->map->height();
   for ( int _i = 0; _i < hei; _i++ ) {
-    expect(mz[_i][0] == 1);
-    expect(mz[_i][wid-1] == 1);
     for ( int _j = 0; _j < wid; _j++ ) {
-      expect(mz[0][_j] == 1);
-      expect(mz[hei-1][_j] == 1);
+      expect(mz[0][_j] == 1 && mz[hei-1][_j] == 1 && mz[_i][0] == 1 && mz[_i][wid-1] == 1);
     }
   }
   delete game;
@@ -83,3 +82,14 @@ void test3(void)
   delete character;
   cout << endl;
 }
+
+void test4(void)
+{
+  cout << "test4 : ";
+  Map *map = new Map();
+  int const **maze = map->maze();
+  expect(maze[map->height()-2][map->width()-2] == GOAL);
+  delete map;
+  cout << endl;
+}
+

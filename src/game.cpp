@@ -7,17 +7,22 @@ Game::Game()
 {
   map = new Map();
 }
+Game::Game(int width, int height)
+{
+  map = new Map(width, height);
+}
 
 void Game::exec()
 {
   while ( ! this->judgeEnd() ) {
     map->print();
   }
+  delete map;
+  delete this;
 }
 
 bool Game::judgeEnd()
 {
-  int const **mp = map->maze();
-  if ( mp[map->height()-2][map->width()-2] == CHARACTER ) { return true; }
+  return map->character->x() == map->height()-2 && map->character->y() == map->width()-2;
 }
 
