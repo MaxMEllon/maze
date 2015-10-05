@@ -8,6 +8,7 @@ class Game
   public:
     Game();
     ~Game();
+    Game& operator=(Game const& game) = default;
     void exec();
     Map *map;
   private:

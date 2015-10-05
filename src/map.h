@@ -9,6 +9,7 @@ class Map
   public:
     Map();
     Map(int _width, int _height);
+    Map& operator=(Map const& map) = default;
     ~Map();
     int const **maze();
     int height();

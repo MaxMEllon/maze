@@ -6,7 +6,9 @@
 void test1(void);
 void test2(void);
 void test3(void);
+
 void testing(bool ope);
+bool expect(bool ope);
 
 int flag = 0;
 
@@ -18,6 +20,22 @@ int main(void)
   return flag;
 }
 
+bool expect(bool ope) {
+  bool f = true;
+  try {
+    testing(ope);
+  } catch (bool e) {
+    f = false;
+  }
+  if ( f ) {
+    cout << OK_MARK;
+  } else {
+    cout << NG_MARK;
+    flag = 1;
+  }
+  return f;
+}
+
 void testing(bool ope)
 {
   if ( ope ) { return; }
@@ -26,61 +44,40 @@ void testing(bool ope)
 
 void test1(void)
 {
+  cout << "test1 : ";
   int n = 10;
-  try {
-    testing(10 == n);
-  } catch(bool e) {
-    std::cout << "test1 : " << NG_MARK << std::endl;
-    flag = 1;
-    return;
-  }
-  std::cout << "test1 : " << OK_MARK  << std::endl;
+  expect(n == 10);
+  cout << endl;
 }
 
 void test2(void)
 {
+  cout << "test2 : ";
   Game *game = new Game();
   int const **mz = game->map->maze();
   int wid = game->map->width();
   int hei = game->map->height();
-  try {
-    for ( int _i; _i < hei; _i++ ) {
-      testing(mz[_i][0] == 1);
-      testing(mz[_i][wid-1] == 1);
-      for ( int _j; _j < wid; _j++ ) {
-        testing(mz[0][_j] == 1);
-        testing(mz[hei-1][_j] == 1);
-      }
+  for ( int _i; _i < hei; _i++ ) {
+    expect(mz[_i][0] == 1);
+    expect(mz[_i][wid-1] == 1);
+    for ( int _j; _j < wid; _j++ ) {
+      expect(mz[0][_j] == 1);
+      expect(mz[hei-1][_j] == 1);
     }
-  } catch(bool e) {
-    std::cout << "test2 : " << NG_MARK << std::endl;
-    delete game;
-    flag = 1;
-    return;
   }
   delete game;
-  std::cout << "test2 : " << OK_MARK << std::endl;
+  cout << endl;
 }
 
 void test3(void)
 {
-  Game *game = new Game();
-  int const **mz = game->map->maze();
-  int wid = game->map->width();
-  int hei = game->map->height();
+  cout << "test3 : ";
+  Map *map = new Map();
   Character *character = new Character();
   int x = character->x();
   int y = character->y();
-  character->move(KEY_DOWN, mz, wid, hei);
-  character->move(KEY_RIGHT, mz, wid, hei);
-  try {
-    testing(x != character->x() || y != character->y());
-  } catch (bool e) {
-    std::cout << "test3 : " << NG_MARK << std::endl;
-    delete game;
-    flag = 1;
-    return;
-  }
-  delete game;
-  std::cout << "test3 : " << OK_MARK << std::endl;
+  character->move(KEY_DOWN,  map->maze(), map->width(), map->height());
+  character->move(KEY_RIGHT, map->maze(), map->width(), map->height());
+  expect(x != character->x() || y != character->y());
+  cout << endl;
 }

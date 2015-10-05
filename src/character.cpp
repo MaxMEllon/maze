@@ -2,18 +2,18 @@
 
 Character::Character()
 {
-  this->_x = 1;
-  this->_y = 1;
+  _x = 1;
+  _y = 1;
 }
 
 int Character::x()
 {
-  return this->_x;
+  return _x;
 }
 
 int Character::y()
 {
-  return this->_y;
+  return _y;
 }
 
 void Character::move(int key, const int **map, int width, int height)
@@ -21,19 +21,19 @@ void Character::move(int key, const int **map, int width, int height)
   switch ( key ) {
     case KEY_UP:
       if ( map[_x-1][_y] == WALL ) { return; }
-      if ( _x > 0 ) { this->_x--; }
+      if ( _x > 0 ) { _x--; }
       break;
     case KEY_DOWN:
       if ( map[_x+1][_y] == WALL ) { return; }
-      if ( _x < width-1 ) { this->_x++; }
+      if ( _x < width-1 ) { _x++; }
       break;
     case KEY_LEFT:
       if ( map[_x][_y-1] == WALL ) { return; }
-      if ( _y > 0 ) { this->_y--; }
+      if ( _y > 0 ) { _y--; }
       break;
     case KEY_RIGHT:
       if ( map[_x][_y+1] == WALL ) { return; }
-      if ( _y < width-1 ) { this->_y++; }
+      if ( _y < width-1 ) { _y++; }
       break;
   }
 }

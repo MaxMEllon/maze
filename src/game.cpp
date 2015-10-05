@@ -5,7 +5,7 @@
 
 Game::Game()
 {
-  this->map = new Map();
+  map = new Map();
 }
 
 Game::~Game()
@@ -16,14 +16,13 @@ Game::~Game()
 void Game::exec()
 {
   while ( ! this->judgeEnd() ) {
-    this->map->print();
+    map->print();
   }
 }
 
 bool Game::judgeEnd()
 {
-  // TODO:
-  // return mp[map->height()-2][map->width()-2] == CHARACTER;
-  return 0;
+  int const **mp = map->maze();
+  if ( mp[map->height()-2][map->width()-2] == CHARACTER ) { return true; }
 }
 

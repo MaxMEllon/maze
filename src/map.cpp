@@ -5,12 +5,12 @@
 
 Map::Map()
 {
-  this->__construct(WIDTH, HEIGHT);
+  __construct(WIDTH, HEIGHT);
 }
 
 Map::Map(int _width, int _height)
 {
-  this->__construct(_width, _height);
+  __construct(_width, _height);
 }
 
 Map::~Map()
@@ -18,33 +18,33 @@ Map::~Map()
   Window::free();
   for ( int _i; _i < _height; _i++ ) { delete[] _maze[_i]; }
   delete _maze;
-  _maze = 0;
+  _maze = nullptr;
 }
 
 int const ** Map::maze()
 {
-  return (int const **)this->_maze;
+  return (int const **)_maze;
 }
 
 int Map::width()
 {
-  return this->_width;
+  return _width;
 }
 
 int Map::height()
 {
-  return this->_width;
+  return _width;
 }
 
 void Map::__construct(int _width, int _height)
 {
-  this->_maze = new int*[_height];
-  for ( int _i = 0; _i < _height; _i++ ) { this->_maze[_i] = new int[_width]; }
+  _maze = new int*[_height];
+  for ( int _i = 0; _i < _height; _i++ ) { _maze[_i] = new int[_width]; }
   this->_width  = _width;
   this->_height = _height;
-  this->initMaze();
-  this->createRoadOfMaze();
-  this->character = new Character();
+  initMaze();
+  createRoadOfMaze();
+  character = new Character();
   Window::initalize();
 }
 
@@ -52,12 +52,12 @@ void Map::initMaze()
 {
   int _i, _j;
   for ( _i = 0; _i < height(); _i++ ) {
-    this->_maze[_i][0] = 1;
-    this->_maze[_i][width()-1] = 1;
+    _maze[_i][0] = 1;
+    _maze[_i][width()-1] = 1;
     for ( _j = 0; _j < width(); _j++ ) {
-      this->_maze[0][_j] = 1;
-      this->_maze[height()-1][_j] = 1;
-      if ( (_i%2 == 0) && (_j%2 == 0) ) { this->_maze[_i][_j] = 1; }
+      _maze[0][_j] = 1;
+      _maze[height()-1][_j] = 1;
+      if ( (_i%2 == 0) && (_j%2 == 0) ) { _maze[_i][_j] = 1; }
     }
   }
 }
@@ -71,16 +71,16 @@ void Map::print()
   for ( _i = 0; _i < height(); _i++ ) {
     for ( _j = 0; _j < width(); _j++ ) {
       if ( character->x() == _i && character->y() == _j ) {
-        this->printChar(CHARACTER);
+        printChar(CHARACTER);
         continue;
       }
-      this->printChar(this->_maze[_i][_j]);
+      printChar(_maze[_i][_j]);
     }
     Window::addString("\n");
   }
-  Window::refreshWindow();
   key = Window::getKeyStroke();
   character->move(key, maze(), width(), height());
+  Window::refreshWindow();
 }
 
 void Map::printChar(int _place)
@@ -110,11 +110,11 @@ void Map::createRoadOfMaze()
     for ( _j = 2; _j < width()-2; _j += 2 ) {
       do {
         dir = rand() % 4;
-      } while ( this->_maze[_i + add[dir][0]][_j + add[dir][1]] == WALL );
-      this->_maze[_i + add[dir][0]][_j + add[dir][1]] = WALL;
+      } while ( _maze[_i + add[dir][0]][_j + add[dir][1]] == WALL );
+      _maze[_i + add[dir][0]][_j + add[dir][1]] = WALL;
     }
   }
-  this->_maze[height()-2][width()-2] = GALL;
+  _maze[height()-2][width()-2] = GALL;
 }
 
 void Map::__debug()
@@ -122,9 +122,9 @@ void Map::__debug()
   int _i, _j;
   for ( _i = 0; _i < height(); _i++ ) {
     for ( _j = 0; _j < width(); _j++ ) {
-      std::cout << this->_maze[_i][_j] << " ";
+      cout << _maze[_i][_j] << " ";
     }
-    std::cout << std::endl;
+    cout << endl;
   }
 }
 
