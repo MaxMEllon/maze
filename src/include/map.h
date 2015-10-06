@@ -12,14 +12,14 @@ class Map
     Map& operator=(Map const& map) = default;
     ~Map();
     Character *character;
-    int const **maze();
+    vector<vector<int>> getMaze();
     int height();
     int width();
     void __debug();
     void print();
 
   private:
-    int **_maze;
+    std::vector<std::vector<int>> maze;
     int _height;
     int _width;
     void __construct(int _width, int _height);

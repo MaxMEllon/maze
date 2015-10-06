@@ -1,12 +1,10 @@
-#include <iostream>
-#include <time.h>
-#include <stdlib.h>
-#include "game.h"
+#include "include/game.h"
 
 Game::Game()
 {
   map = new Map();
 }
+
 Game::Game(int width, int height)
 {
   map = new Map(width, height);
@@ -14,9 +12,7 @@ Game::Game(int width, int height)
 
 void Game::exec()
 {
-  while ( ! this->judgeEnd() ) {
-    map->print();
-  }
+  while ( ! this->judgeEnd() ) { map->print(); }
   delete map;
   delete this;
 }

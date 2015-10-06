@@ -14,6 +14,7 @@ cppでオブジェクト指向の練習を兼ねてコンソール迷路
 ## Usage
 
 ```sh
+$ cd src
 $ make exec
 ```
 

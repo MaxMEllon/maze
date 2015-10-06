@@ -1,4 +1,4 @@
-#include "map.h"
+#include "include/map.h"
 
 #define WIDTH  19
 #define HEIGHT 19
@@ -16,14 +16,11 @@ Map::Map(int _width, int _height)
 Map::~Map()
 {
   Window::free();
-  for ( int _i; _i < _height; _i++ ) { delete[] _maze[_i]; }
-  delete _maze;
-  _maze = nullptr;
 }
 
-int const ** Map::maze()
+vector<vector<int>> Map::getMaze()
 {
-  return (int const **)_maze;
+  return maze;
 }
 
 int Map::width()
@@ -38,8 +35,7 @@ int Map::height()
 
 void Map::__construct(int _width, int _height)
 {
-  _maze = new int*[_height];
-  for ( int _i = 0; _i < _height; _i++ ) { _maze[_i] = new int[_width]; }
+  maze = vector<vector<int>>(_height, vector<int>(_width, 0));
   this->_width  = _width;
   this->_height = _height;
   initMaze();
@@ -52,12 +48,12 @@ void Map::initMaze()
 {
   int _i, _j;
   for ( _i = 0; _i < height(); _i++ ) {
-    _maze[_i][0] = 1;
-    _maze[_i][width()-1] = 1;
+    maze[_i][0] = 1;
+    maze[_i][width()-1] = 1;
     for ( _j = 0; _j < width(); _j++ ) {
-      _maze[0][_j] = 1;
-      _maze[height()-1][_j] = 1;
-      if ( (_i%2 == 0) && (_j%2 == 0) ) { _maze[_i][_j] = 1; }
+      maze[0][_j] = 1;
+      maze[height()-1][_j] = 1;
+      if ( (_i%2 == 0) && (_j%2 == 0) ) { maze[_i][_j] = 1; }
     }
   }
 }
@@ -74,12 +70,12 @@ void Map::print()
         printChar(CHARACTER);
         continue;
       }
-      printChar(_maze[_i][_j]);
+      printChar(maze[_i][_j]);
     }
     Window::addString("\n");
   }
   key = Window::getKeyStroke();
-  character->move(key, maze(), width(), height());
+  character->move(key, getMaze(), width(), height());
   Window::refreshWindow();
 }
 
@@ -110,11 +106,11 @@ void Map::createRoadOfMaze()
     for ( _j = 2; _j < width()-2; _j += 2 ) {
       do {
         dir = rand() % 4;
-      } while ( _maze[_i + add[dir][0]][_j + add[dir][1]] == WALL );
-      _maze[_i + add[dir][0]][_j + add[dir][1]] = WALL;
+      } while ( maze[_i + add[dir][0]][_j + add[dir][1]] == WALL );
+      maze[_i + add[dir][0]][_j + add[dir][1]] = WALL;
     }
   }
-  _maze[height()-2][width()-2] = GOAL;
+  maze[height()-2][width()-2] = GOAL;
 }
 
 void Map::__debug()
@@ -122,7 +118,7 @@ void Map::__debug()
   int _i, _j;
   for ( _i = 0; _i < height(); _i++ ) {
     for ( _j = 0; _j < width(); _j++ ) {
-      cout << _maze[_i][_j] << " ";
+      cout << maze[_i][_j] << " ";
     }
     cout << endl;
   }

@@ -1,4 +1,4 @@
-#include "../src/game.h"
+#include "../src/include/game.h"
 
 #define OK_MARK "\x1b[1m\x1b[32m✔\x1b[49m\x1b[0m"
 #define NG_MARK "\x1b[1m\x1b[40m✘\x1b[49m\x1b[0m"
@@ -56,7 +56,7 @@ void test2(void)
 {
   cout << "test2 : ";
   Game *game = new Game(5, 5);
-  int const **mz = game->map->maze();
+  vector<vector<int>> mz = game->map->getMaze();
   int wid = game->map->width();
   int hei = game->map->height();
   for ( int _i = 0; _i < hei; _i++ ) {
@@ -71,15 +71,15 @@ void test2(void)
 void test3(void)
 {
   cout << "test3 : ";
-  Map *map = new Map();
+  Map *map = new Map(15, 15);
   Character *character = new Character();
   int x = character->x();
   int y = character->y();
-  character->move(KEY_DOWN,  map->maze(), map->width(), map->height());
-  character->move(KEY_RIGHT, map->maze(), map->width(), map->height());
+  character->move(KEY_DOWN,  map->getMaze(), map->width(), map->height());
+  character->move(KEY_RIGHT, map->getMaze(), map->width(), map->height());
   expect(x != character->x() || y != character->y());
-  delete map;
   delete character;
+  delete map;
   cout << endl;
 }
 
@@ -87,8 +87,8 @@ void test4(void)
 {
   cout << "test4 : ";
   Map *map = new Map();
-  int const **maze = map->maze();
-  expect(maze[map->height()-2][map->width()-2] == GOAL);
+  vector<vector<int>> mz = map->getMaze();
+  expect(mz[map->height()-2][map->width()-2] == GOAL);
   delete map;
   cout << endl;
 }

@@ -7,7 +7,7 @@ class Character
 {
   public:
     Character();
-    void move(int key, const int **map, int width, int height);
+    void move(int key, vector<vector<int>> map, int width, int height);
     int x();
     int y();
   private:

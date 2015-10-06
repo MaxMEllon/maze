@@ -1,5 +1,5 @@
-#include "env.h"
-#include "game.h"
+#include "../include/env.h"
+#include "../include/game.h"
 
 int main(int argc, char const* argv[])
 {
