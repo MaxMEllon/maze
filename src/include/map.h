@@ -8,7 +8,7 @@ class Map
 {
   public:
     Map();
-    Map(int _width, int _height);
+    Map(int width, int height);
     Map& operator=(Map const& map) = default;
     ~Map();
     Character *character;
@@ -22,7 +22,7 @@ class Map
     std::vector<std::vector<int>> maze;
     int _height;
     int _width;
-    void __construct(int _width, int _height);
+    void __construct(int width, int height);
     void createRoadOfMaze();
     void initMaze();
     void printChar(int _place);

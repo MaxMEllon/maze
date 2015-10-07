@@ -4,10 +4,10 @@ ifeq ($(CXX), clang++)
 else
 	CFLAGS = -Wall -Wextra -O2 -std=c++11
 endif
-TEST = -D"TEST"
+TEST = -g -D"TEST"
 LIBS =
 INCLUDE = -I./include
-OBJDIR = ./obj
+OBJDIR  = ./obj
 SOURCES = $(wildcard *.cpp)
 OBJECTS = $(addprefix $(OBJDIR)/, $(SOURCES:.cpp=.o))
 

@@ -1,7 +1,7 @@
 #include "../src/include/game.h"
 
 #define OK_MARK "\x1b[1m\x1b[32m✔\x1b[49m\x1b[0m"
-#define NG_MARK "\x1b[1m\x1b[40m✘\x1b[49m\x1b[0m"
+#define NG_MARK "\x1b[1m\x1b[31m✘\x1b[49m\x1b[0m"
 
 void test1(void);
 void test2(void);

@@ -8,9 +8,9 @@ Map::Map()
   __construct(WIDTH, HEIGHT);
 }
 
-Map::Map(int _width, int _height)
+Map::Map(int width, int height)
 {
-  __construct(_width, _height);
+  __construct(width, height);
 }
 
 Map::~Map()
@@ -33,11 +33,11 @@ int Map::height()
   return _width;
 }
 
-void Map::__construct(int _width, int _height)
+void Map::__construct(int width, int height)
 {
-  maze = vector<vector<int>>(_height, vector<int>(_width, 0));
-  this->_width  = _width;
-  this->_height = _height;
+  maze = vector<vector<int>>(width, vector<int>(height, 0));
+  this->_width  = width;
+  this->_height = height;
   initMaze();
   createRoadOfMaze();
   character = new Character();
@@ -83,16 +83,16 @@ void Map::printChar(int _place)
 {
   switch ( _place ) {
     case WALL:
-      Window::addString("@@@");
+      Window::addString("@@");
       break;
     case ENPTY:
-      Window::addString("   ");
+      Window::addString("  ");
       break;
     case GOAL:
-      Window::addString(" G ");
+      Window::addString("[]");
       break;
     case CHARACTER:
-      Window::addString(" * ");
+      Window::addString("<>");
       break;
   }
 }
