@@ -2,6 +2,7 @@
 #define INCLUDED_MAP
 
 #include "character.h"
+#include "enemy.h"
 #include "window.h"
 
 class Map
@@ -12,6 +13,7 @@ class Map
     Map& operator=(Map const& map) = default;
     ~Map();
     Character *character;
+    Enemy *enemy;
     vector<vector<int>> getMaze();
     int height();
     int width();
@@ -25,7 +27,7 @@ class Map
     void __construct(int width, int height);
     void createRoadOfMaze();
     void initMaze();
-    void printChar(int _place);
+    void printChar(int _type);
 };
 
 #endif

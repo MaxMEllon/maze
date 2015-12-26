@@ -12,13 +12,16 @@ Game::Game(int width, int height)
 
 void Game::exec()
 {
-  while ( ! this->judgeEnd() ) { map->print(); }
+  Title* title = new Title();
+  title->show();
+  while (! this->judgeEnd()) { map->print(); }
   delete map;
   delete this;
 }
 
 bool Game::judgeEnd()
 {
-  return map->character->x() == map->height()-2 && map->character->y() == map->width()-2;
+  return map->character->life() <= 0
+      || map->getMaze()[map->character->x()][map->character->y()] == GOAL;
 }
 

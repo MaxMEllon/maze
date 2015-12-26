@@ -2,6 +2,7 @@
 #define INCLUDED_GAME
 
 #include "map.h"
+#include "title.h"
 
 class Game
 {

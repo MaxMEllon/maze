@@ -16,10 +16,11 @@ template<class T> inline std::string toString(T x) {
 }
 
 typedef enum _PLACE_TYPE {
-  ENPTY,
-  WALL,
-  GOAL,
-  CHARACTER
+  ENPTY = 0,
+  WALL = 1,
+  GOAL = 2,
+  CHARACTER = 3,
+  ENEMY = 4
 } PLACE_TYPE;
 
 #endif

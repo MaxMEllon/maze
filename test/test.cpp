@@ -55,13 +55,14 @@ void test1(void)
 void test2(void)
 {
   cout << "test2 : ";
-  Game *game = new Game(5, 5);
+  Game *game = new Game(6, 6);
   vector<vector<int>> mz = game->map->getMaze();
   int wid = game->map->width();
   int hei = game->map->height();
   for ( int _i = 0; _i < hei; _i++ ) {
     for ( int _j = 0; _j < wid; _j++ ) {
-      expect(mz[0][_j] == 1 && mz[hei-1][_j] == 1 && mz[_i][0] == 1 && mz[_i][wid-1] == 1);
+      expect(mz[0][_j] == WALL && mz[hei-1][_j] == WALL &&
+             mz[_i][0] == WALL && mz[_i][wid-1] == WALL);
     }
   }
   delete game;
@@ -75,8 +76,8 @@ void test3(void)
   Character *character = new Character();
   int x = character->x();
   int y = character->y();
-  character->move(KEY_DOWN,  map->getMaze(), map->width(), map->height());
-  character->move(KEY_RIGHT, map->getMaze(), map->width(), map->height());
+  character->move(KEY_DOWN,  map->getMaze());
+  character->move(KEY_RIGHT, map->getMaze());
   expect(x != character->x() || y != character->y());
   delete character;
   delete map;

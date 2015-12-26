@@ -24,4 +24,4 @@ install:
 
 script:
   - $CXX --version
-  - cd src && make test && ./test.out
+  - make test

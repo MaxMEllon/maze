@@ -1,2 +1,3 @@
 *.o
+/src/test.out.dSYM/
 *.out

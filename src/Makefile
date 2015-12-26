@@ -1,6 +1,6 @@
-LDFLAGS = -ltinfo -lncurses
+LDFLAGS = -lncurses
 ifeq ($(CXX), clang++)
-	CFLAGS = -Wall -Wextra -O2 -std=c++11 -stdlib=libc++
+	CFLAGS = -Wall -Wextra -Wformat -O2 -std=c++11 -stdlib=libc++
 else
 	CFLAGS = -Wall -Wextra -O2 -std=c++11
 endif
@@ -10,7 +10,6 @@ INCLUDE = -I./include
 OBJDIR  = ./obj
 SOURCES = $(wildcard *.cpp)
 OBJECTS = $(addprefix $(OBJDIR)/, $(SOURCES:.cpp=.o))
-
 
 game: $(OBJECTS) $(LIBS)
 	$(CXX) $(CFLAGS) $(INCLUDE) -o $@.out $^ main/main.cpp $(LDFLAGS)
@@ -24,7 +23,7 @@ $(OBJDIR)/%.o: %.cpp
 	@[ -d $(OBJDIR) ] || mkdir -p $(OBJDIR)
 	$(CXX) $(CFLAGS) $(INCLUDE) -o $@ -c $< $(LDFLAGS)
 
-all: clean game.out
+all: clean game test.out
 
 .PHONY: exec
 exec: game
@@ -34,4 +33,4 @@ exec: game
 test: test.out
 
 clean:
-	-rm -rf obj/*.o *.out
+	-rm -rf obj/*.o *.out test.out.dSYM
