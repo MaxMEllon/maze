@@ -15,7 +15,7 @@ class Game
     Map *map;
 
   private:
-    bool judgeEnd();
+    bool isEnd();
 };
 
 #endif

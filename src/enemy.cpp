@@ -1,5 +1,10 @@
 #include "include/enemy.h"
 
+/**
+ * Enemy::Enemy()
+ * Enemyの生成
+ * 生成時はスポーンしません map上にスポーンさせるときは，Enemy::spown()を用いる
+ */
 Enemy::Enemy()
 {
   _life = 1;
@@ -7,16 +12,34 @@ Enemy::Enemy()
   _name = "enemy";
 }
 
+/**
+ * TODO: 現在使われていない関数
+ * Enemy::name()
+ * 名前の取得
+ */
 string Enemy::name()
 {
   return _name;
 }
 
+/**
+ * TODO: 現在使われていない関数
+ * Enemy::speed()
+ * 移動速度の取得
+ */
 int Enemy::speed()
 {
   return _speed;
 }
 
+/**
+ * Enemy::spown()
+ * @param: マップ : vector<vector<int>>
+ * @param: マップ横幅 : int
+ * @param: マップ縦幅 : int
+ * 敵をマップ上の空白スペースに発生させます
+ * Issue: 2体以上spownさせた時，敵の上に敵が発生する
+ */
 void Enemy::spown(vector<vector<int>> map, int width, int height)
 {
   _live = true;
@@ -29,6 +52,11 @@ void Enemy::spown(vector<vector<int>> map, int width, int height)
   }
 }
 
+/**
+ * Enemy::despown()
+ * 敵をデスポーンさせる．インスタンスは残っている
+ * リスポーンさせるときは，再度spown()を呼び出す
+ */
 void Enemy::despown()
 {
   _live = false;
@@ -36,6 +64,11 @@ void Enemy::despown()
   _y = -1;
 }
 
+/**
+ * Enemy::move()
+ * @param: マップ : vector<vector<int>>
+ * 敵を移動させる（ランダム）
+ */
 void Enemy::move(vector<vector<int>> map)
 {
   if (! _live) { return; }

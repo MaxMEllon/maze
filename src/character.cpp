@@ -25,41 +25,24 @@ int Character::y()
  */
 void Character::move(int key, vector<vector<int>> map)
 {
-  switch ( key ) {
+  switch (key) {
     case KEY_UP:
-      if ( map[_x-1][_y] == WALL ) { beep(); return; }
-      if ( _x > 0 ) { _x--; }
+      if (map[_x-1][_y] == WALL) { beep(); return; }
+      if (_x > 0) { _x--; }
       break;
     case KEY_DOWN:
-      if ( map[_x+1][_y] == WALL ) { beep(); return; }
-      if ( _x < (int)map.size()-1 ) { _x++; }
+      if (map[_x+1][_y] == WALL) { beep(); return; }
+      if (_x < (int)map.size()-1) { _x++; }
       break;
     case KEY_LEFT:
-      if ( map[_x][_y-1] == WALL ) { beep(); return; }
-      if ( _y > 0 ) { _y--; }
+      if (map[_x][_y-1] == WALL) { beep(); return; }
+      if (_y > 0) { _y--; }
       break;
     case KEY_RIGHT:
-      if ( map[_x][_y+1] == WALL ) { beep(); return; }
-      if ( _y < (int)map[_x].size()-1 ) { _y++; }
+      if (map[_x][_y+1] == WALL) { beep(); return; }
+      if (_y < (int)map[_x].size()-1) { _y++; }
       break;
   }
-}
-
-/**
- * TODO: Characterが持つべきでない．(?)
- * Character::showLife()
- * マップ全体の状態をWindowを用いて描画します
- * 各セルの描画にはMap::printChar()を用います
- */
-void Character::showLife()
-{
-  Window::setColor(BLACK_WHITE);
-  Window::addString("Life: ");
-  for (int i = 0; i < life(); i++) {
-    Window::setColor(BLACK_GREEN);
-    Window::addString("   |");
-  }
-  Window::addString("\n");
 }
 
 /**
@@ -78,4 +61,9 @@ int Character::life()
 void Character::decreaseLife()
 {
   _life--;
+}
+
+bool Character::isSameLocation(int x, int y)
+{
+  return _x == x && _y == y;
 }

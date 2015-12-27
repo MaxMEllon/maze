@@ -1,4 +1,5 @@
 #include "include/map.h"
+#include "include/tui.h"
 
 #define WIDTH  19
 #define HEIGHT 19
@@ -106,72 +107,18 @@ void Map::createRoadOfMaze()
 }
 
 /**
- * TODO: Mapが持つべきでない．(?)
- * Map::print()
- * マップ全体の状態をWindowを用いて描画します
- * 各セルの描画にはMap::printChar()を用います
- * Issue: キャラとエネミーの当たり判定も行っている
+ * Map::next()
+ * マップをワンステップ進行させます．
+ * カーソルキーが入力されるまでは進行待ち状態になります
  */
-void Map::print()
+void Map::next()
 {
-  Window::eraseBuff();
-  Window::moveCursol(0, 0);
-  character->showLife();
-  for (int _i = 0; _i < height(); _i++ ) {
-    for (int _j = 0; _j < width(); _j++ ) {
-      if (enemy->x()-1 <= character->x() && character->x() <= enemy->x()+1
-       && enemy->y()-1 <= character->y() && character->y() <= enemy->y()+1) {
-        enemy->despown();
-        character->decreaseLife();
-      }
-      if (character->x() == _i && character->y() == _j) {
-        printChar(CHARACTER);
-        continue;
-      }
-      else if (enemy->x() == _i && enemy->y() == _j) {
-        printChar(ENEMY);
-        continue;
-      }
-      printChar(maze[_i][_j]);
-    }
-    Window::addString("\n");
-  }
-  int key = Window::getKeyStroke();
-  character->move(key, getMaze());
+  Tui *tui = new Tui();
+  tui->printCharacterLife(character->life());
+  tui->printMap(this);
+  character->move(Window::getKeyStroke(), getMaze());
   enemy->move(getMaze());
-  Window::refreshWindow();
-}
-
-/**
- * TODO: Mapが持つべきでない．(?)
- * Map::printChar()
- * @param: _type : int
- * マップのセルをWindowに描画します
- */
-void Map::printChar(int _type)
-{
-  switch ( _type ) {
-    case WALL:
-      Window::setColor(BLACK_RED);
-      Window::addString("  ");
-      break;
-    case ENPTY:
-      Window::setColor(BLACK_BLACK);
-      Window::addString("  ");
-      break;
-    case GOAL:
-      Window::setColor(BLACK_GREEN);
-      Window::addString("[]");
-      break;
-    case CHARACTER:
-      Window::setColor(BLACK_GREEN);
-      Window::addString("\\/");
-      break;
-    case ENEMY:
-      Window::setColor(BLACK_WHITE);
-      Window::addString("><");
-      break;
-  }
+  delete tui;
 }
 
 /**
