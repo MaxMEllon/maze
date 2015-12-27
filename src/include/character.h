@@ -11,9 +11,10 @@ class Character
     void move(int key, vector<vector<int>> map);
     int x();
     int y();
-    void showLife();
     int life();
     void decreaseLife();
+    bool isSameLocation(int x, int y);
+    bool isHit(int x, int y);
   protected:
     int _life;
     int _x;

@@ -18,16 +18,15 @@ class Map
     int height();
     int width();
     void __debug();
-    void print();
+    void next();
 
   private:
-    std::vector<std::vector<int>> maze;
+    vector<vector<int>> maze;
     int _height;
     int _width;
     void __construct(int width, int height);
     void createRoadOfMaze();
     void initMaze();
-    void printChar(int _type);
 };
 
 #endif
