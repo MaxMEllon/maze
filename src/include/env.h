@@ -8,6 +8,8 @@
 #include <time.h>
 #include <stdlib.h>
 #include <ncurses.h>
+#include <time.h>
+#include <sys/time.h>
 
 using namespace std;
 

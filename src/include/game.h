@@ -15,7 +15,10 @@ class Game
     Map *map;
 
   private:
-    bool isEnd();
+    bool isGameOver();
+    bool isGoal();
+    void goal(Title *titleDisplay);
+    void gameOver(Title *titleDisplay);
 };
 
 #endif

@@ -7,10 +7,15 @@ class Title
 {
   public:
     Title();
-    void show();
     Title& operator=(Title const& title) = default;
+    void title();
+    void gameOver();
+    void goal();
   private:
     string titleText;
+    string gameOverText;
+    string goalText;
+    void show(string const text);
 };
 
 #endif
