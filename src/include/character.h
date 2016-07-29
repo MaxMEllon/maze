@@ -15,6 +15,7 @@ class Character
     void decreaseLife();
     bool isSameLocation(int x, int y);
     bool isHit(int x, int y);
+
   protected:
     int _life;
     int _x;
